@@ -65,6 +65,12 @@ export const getPeople = (req, res) => {
             LastName: 'Kafwalubi',
             title: 'Web Developer',
             LinkedIn: 'https://www.linkedin.com/in/gloire-kafwalubi-3152871a0/'
+        },
+        {
+            FirstName: 'Bernard',
+            LastName: 'Ng',
+            title: 'Software Developer',
+            LinkedIn: 'https://www.linkedin.com/in/bernard-ngandu/'
         }
     ]);
 }
