@@ -26,7 +26,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: setup node
+      - name: setup nodes
         uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node-version }}
@@ -49,13 +49,13 @@ jobs:
       needs: [build_test]
 
       steps:
-        - name: checkout repo
+        - name: Checkout Repo
           uses: actions/checkout@v2
 
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v1
       
-        - name: Set up Docker Buildx
+        - name: Set up Docker Build
           uses: docker/setup-buildx-action@v1
 
         - name: Login to DockerHub
@@ -70,13 +70,13 @@ jobs:
             context: ./
             file: ./Dockerfile
             push: true
-            tags: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-demo:latest
+            tags: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest
           
         - name: Run the image in a container
           uses: addnab/docker-run-action@v3
           with:
-            image: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-demo:latest
+            image: ${{ secrets.DOCKERHUB_USERNAME }}/nodejs-app:latest
             run: |
-              echo "runing the docker image"
-              echo "Testing the nodejs  app endpoints"
+              echo "Running the docker image"
+              echo "Testing the nodejs-app endpoints"
               echo ${{ steps.docker_build.outputs.digest }}
